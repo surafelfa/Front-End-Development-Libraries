@@ -53,6 +53,7 @@ class DrumMachine extends React.Component{
         this.handleClick = this.handleClick.bind(this);
         this.handlePowerClick = this.handlePowerClick.bind(this);
         this.handleBankClick = this.handleBankClick.bind(this);
+        this.handleVolume = this.handleVolume.bind(this);
         //this.modifyIndex = this.modifyIndex.bind(this);
     }
     handleClick(event){
@@ -77,6 +78,14 @@ class DrumMachine extends React.Component{
             $('#display').text('Smooth Piano Kit');
             //this.modifyIndex(1)
         }
+    }
+    handleVolume(){
+        let volume = document.getElementById('customranges').value;
+        let audios = document.querySelectorAll('audio');
+        $('#display').text(`Volume: ${volume}`);
+        audios.forEach(audio=>{
+            audio.volume = volume/100;
+        })
     }
     render(){
         return (
@@ -130,7 +139,7 @@ class DrumMachine extends React.Component{
                             
                     </div>
                     <div class="volume-wrapper">
-                        <input type="range" min="0" max="100" value="50" class="volume" />
+                        <input type="range" min="0" max="100" id="customranges" className="form-range" onInput={this.handleVolume}/>
                     </div>
                     <div className="on-off-wrapper">
                         <p>Bank</p>
