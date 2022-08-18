@@ -1,7 +1,7 @@
 class Previewer extends React.Component {
     render() {
         return ( 
-            <div className='previewer-outter-div'>
+            <div className='previewer outter-div'>
               <div className='header-div'>
                 <div>(S) <span>Previewer</span></div>
                 <div className='btn btn-previewer'><i className="fas fa-expand-arrows-alt"></i></div>
@@ -70,7 +70,7 @@ And here. | Okay. | I think we get it.
     render() {
         return ( 
             <React.Fragment>
-              <div className='editor-outter-div'>
+              <div className='editor outter-div'>
                 <div className='header-div'>
                   <div>(S) <span>Editor</span></div>
                   <div className='btn btn-editor'><i className="fas fa-expand-arrows-alt"></i></div>
@@ -92,14 +92,14 @@ $(document).ready(()=>{
     $('.btn-editor i').toggleClass('fa-expand-arrows-alt');
     $(".btn-editor i").toggleClass('fa-compress-alt');
     $('#editor').toggleClass('large');
-    $('.previewer-outter-div').toggleClass('disappear');
+    $('.previewer.outter-div').toggleClass('disappear');
    });
 
     $('.btn-previewer').on('click', ()=>{
     $('.btn-previewer i').toggleClass('fa-expand-arrows-alt');
     $(".btn-previewer i").toggleClass('fa-compress-alt');
     $('#preview').toggleClass('large');
-    $('.editor-outter-div').toggleClass('disappear');
+    $('.editor.outter-div').toggleClass('disappear');
    })
 
 })
