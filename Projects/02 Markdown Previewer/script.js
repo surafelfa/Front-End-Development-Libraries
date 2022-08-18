@@ -1,12 +1,23 @@
 class Previewer extends React.Component {
+    constructor(props){
+      super(props);
+      this.handleClick = this.handleClick.bind(this)
+    }
+    handleClick(){
+      $('.btn-previewer i').toggleClass('fa-expand-arrows-alt');
+      $(".btn-previewer i").toggleClass('fa-compress-alt');
+      $('#preview').toggleClass('large');
+      $('.editor.outter-div').toggleClass('disappear');
+    }
     render() {
+      
         return ( 
             <div className='previewer outter-div'>
               <div className='header-div'>
                 <div>(S) <span>Previewer</span></div>
-                <div className='btn btn-previewer'><i className="fas fa-expand-arrows-alt"></i></div>
+                <div className='btn btn-previewer' onClick={this.handleClick}><i className="fas fa-expand-arrows-alt"></i></div>
               </div>
-              <div id="preview"  contentEditable='true' dangerouslySetInnerHTML={{ __html: marked.parse(this.props.userInput) }}></div>        
+              <div id="preview"  contentEditable='true' dangerouslySetInnerHTML={{ __html: marked.parse(this.props.userInput) }}></div>    
             </div>
          );
     }
@@ -15,6 +26,8 @@ class Previewer extends React.Component {
 class Editor extends React.Component {
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state = { 
             input: `
 # Welcome to my React Markdown Previewer!
@@ -60,12 +73,17 @@ And here. | Okay. | I think we get it.
 ![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
 `,
         }
-        this.handleChange = this.handleChange.bind(this);
     }
     handleChange(event){
         this.setState(
             {input: event.target.value}
         );
+    }
+    handleClick(){
+      $('.btn-editor i').toggleClass('fa-expand-arrows-alt');
+      $(".btn-editor i").toggleClass('fa-compress-alt');
+      $('#editor').toggleClass('large');
+      $('.previewer.outter-div').toggleClass('disappear');
     }
     render() {
         return ( 
@@ -73,7 +91,7 @@ And here. | Okay. | I think we get it.
               <div className='editor outter-div'>
                 <div className='header-div'>
                   <div>(S) <span>Editor</span></div>
-                  <div className='btn btn-editor'><i className="fas fa-expand-arrows-alt"></i></div>
+                  <div className='btn btn-editor' onClick={this.handleClick}><i className="fas fa-expand-arrows-alt"></i></div>
                 </div>
                 <textarea id='editor'
                   autofocus
@@ -87,20 +105,4 @@ And here. | Okay. | I think we get it.
          );
     }
 }
-$(document).ready(()=>{
-    $('.btn-editor').on('click', ()=>{
-    $('.btn-editor i').toggleClass('fa-expand-arrows-alt');
-    $(".btn-editor i").toggleClass('fa-compress-alt');
-    $('#editor').toggleClass('large');
-    $('.previewer.outter-div').toggleClass('disappear');
-   });
-
-    $('.btn-previewer').on('click', ()=>{
-    $('.btn-previewer i').toggleClass('fa-expand-arrows-alt');
-    $(".btn-previewer i").toggleClass('fa-compress-alt');
-    $('#preview').toggleClass('large');
-    $('.editor.outter-div').toggleClass('disappear');
-   })
-
-})
 ReactDOM.render(<Editor />, document.getElementById("root"));

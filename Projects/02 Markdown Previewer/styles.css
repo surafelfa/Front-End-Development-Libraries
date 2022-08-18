@@ -44,7 +44,7 @@ body {
   background-color: #c0d8d8;
   overflow: auto;
   padding: 5px 10px;
-  border: none;
+  border-collapse: none;
 }
 
 #preview {
