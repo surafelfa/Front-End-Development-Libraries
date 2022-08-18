@@ -86,4 +86,9 @@ audio {
 /* event */
 .on-off.off {
   left: 0;
+}
+
+.drum-pad.click {
+  background-color: #ffa500;
+  box-shadow: none;
 }/*# sourceMappingURL=styles.css.map */

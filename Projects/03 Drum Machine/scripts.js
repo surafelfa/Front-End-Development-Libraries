@@ -60,7 +60,11 @@ class DrumMachine extends React.Component{
         if(!document.getElementById('power').classList.contains('off')){
             let target = event.target.firstChild.id;
             document.getElementById(target).play();
-            $('#display').text(target)
+            $('#display').text(target);
+            event.target.classList.toggle('click');
+            setTimeout(()=>{
+                event.target.classList.toggle('click');
+            },150);
         }
     }
     handlePowerClick(event){
