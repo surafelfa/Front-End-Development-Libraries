@@ -50,6 +50,9 @@ $(document).ready(()=>{
 class DrumMachine extends React.Component{
     constructor(props){
         super(props);
+        this.state={
+            index: 1,
+        }
         this.handleClick = this.handleClick.bind(this);
         this.handlePowerClick = this.handlePowerClick.bind(this);
         this.handleBankClick = this.handleBankClick.bind(this);
@@ -77,10 +80,14 @@ class DrumMachine extends React.Component{
         let target = event.target.firstChild.id;
         if(document.getElementById(target).classList.toggle('off')){
             $('#display').text('Heater Kit');
-            //this.modifyIndex(0);
+            this.setState({
+                index: 0
+            });
         }else{
             $('#display').text('Smooth Piano Kit');
-            //this.modifyIndex(1)
+            this.setState({
+                index: 1
+            });
         }
     }
     handleVolume(){
@@ -96,39 +103,39 @@ class DrumMachine extends React.Component{
             <div id="drum-machine">
                 <div className="drum-pads left-div">
                     <span className="drum-pad" id="Heater-1" onClick={this.handleClick} >
-                        <audio className="clip" id="Q"  type="audio/mp3" src={audioURL.Q[1]}></audio>
+                        <audio className="clip" id="Q"  type="audio/mp3" src={audioURL.Q[this.state.index]}></audio>
                         Q
                     </span>
                     <span className="drum-pad" id="Heater-2" onClick={this.handleClick}>
-                        <audio className="clip" id="W"  type="audio/mp3" src={audioURL.W[1]}></audio>
+                        <audio className="clip" id="W"  type="audio/mp3" src={audioURL.W[this.state.index]}></audio>
                         W
                     </span>
                     <span className="drum-pad" id="Heater-3" onClick={this.handleClick}>
-                        <audio className="clip" id="E"  type="audio/mp3" src={audioURL.E[1]}></audio>
+                        <audio className="clip" id="E"  type="audio/mp3" src={audioURL.E[this.state.index]}></audio>
                         E
                     </span>
                     <span className="drum-pad" id="Heater-4" onClick={this.handleClick}>
-                        <audio className="clip" id="A"  type="audio/mp3" src={audioURL.A[1]}></audio>
+                        <audio className="clip" id="A"  type="audio/mp3" src={audioURL.A[this.state.index]}></audio>
                         A
                     </span>
                     <span className="drum-pad" id="Heater-6" onClick={this.handleClick}>
-                        <audio className="clip" id="S"  type="audio/mp3" src={audioURL.S[1]}></audio>
+                        <audio className="clip" id="S"  type="audio/mp3" src={audioURL.S[this.state.index]}></audio>
                         S
                     </span>
                     <span className="drum-pad" id="Dsc-Oh" onClick={this.handleClick}>
-                        <audio className="clip" id="D"  type="audio/mp3" src={audioURL.D[1]}></audio>
+                        <audio className="clip" id="D"  type="audio/mp3" src={audioURL.D[this.state.index]}></audio>
                         D
                     </span>
                     <span className="drum-pad" id="Kick-n-Hat" onClick={this.handleClick}>
-                        <audio className="clip" id="Z"  type="audio/mp3" src={audioURL.Z[1]}></audio>
+                        <audio className="clip" id="Z"  type="audio/mp3" src={audioURL.Z[this.state.index]}></audio>
                         Z
                     </span>
                     <span className="drum-pad" id="RP4-KICK-1" onClick={this.handleClick}>
-                        <audio className="clip" id="X"  type="audio/mp3" src={audioURL.X[1]}></audio>
+                        <audio className="clip" id="X"  type="audio/mp3" src={audioURL.X[this.state.index]}></audio>
                         X
                     </span>
                     <span className="drum-pad" id="Cev_H2" onClick={this.handleClick}>
-                        <audio className="clip" id="C"  type="audio/mp3" src={audioURL.C[1]}></audio>
+                        <audio className="clip" id="C"  type="audio/mp3" src={audioURL.C[this.state.index]}></audio>
                         C
                     </span>
                 </div>
