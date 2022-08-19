@@ -1,0 +1,8 @@
+@import url("http://fonts.cdnfonts.com/css/led-digital-7");
+* {
+  box-sizing: border-box;
+}
+
+.label {
+  font-family: "LED Digital 7", sans-serif;
+}/*# sourceMappingURL=styles.css.map */
