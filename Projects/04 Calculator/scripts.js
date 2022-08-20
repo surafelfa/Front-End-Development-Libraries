@@ -8,6 +8,7 @@ class Calculator extends React.Component{
         this.reset = this.reset.bind(this);
         this.displayNumber = this.displayNumber.bind(this);
         this.operatorClicked = this.operatorClicked.bind(this);
+        this.calculate = this.calculate.bind(this);
         this.state = {
             userInput:'0',
             output:'0',
@@ -74,22 +75,29 @@ class Calculator extends React.Component{
             }));
         }
     }
+    calculate(){
+        this.setState( state => ({
+            output: state.output.replace(/[\/\*\-\+\.]$/, ''),
+        }));
+        this.setState( state => ({
+            userInput: eval(state.output),
+            output: eval(state.output),
+        }));
+    }
     handleClick(event){
         let value = event.target.value;
         if(event.target.id === "clear"){
             this.reset();
         }
         else if(".0123456789".includes(value)){
-            this.displayNumber(value)
+            if(this.state.userInput.length != 20)
+                this.displayNumber(value);
         }
         else if("/*-+".includes(value)){
             this.operatorClicked(value);            
         }
         else if(event.target.id === "equals"){
-            this.setState( state => ({
-                userInput: eval(state.output),
-                output: eval(state.output),
-            }));
+            this.calculate();
         }
     }
     render(){
