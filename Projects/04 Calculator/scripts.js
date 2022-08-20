@@ -49,33 +49,29 @@ class Calculator extends React.Component{
         }       
     }
     operatorClicked(value){
-        if(!/[\/\*\-\+]$/.test(this.state.output)){
+        if(/[\d\.][\/\*\-\+]$/.test(this.state.output+value)){
             this.setState( state => ({
                 userInput: value,
                 output: state.output + value
             }));
         }
+        else if(/[\/\*\+]\-$/.test(this.state.output+value)){
+            this.setState( state => ({
+                userInput: value,
+                output: state.output + value
+            }));
+        }
+        else if(/[\/\*\+]\-[\/\*\+]$/.test(this.state.output+value)){
+            this.setState( state => ({
+                userInput: value,
+                output: state.output.replace(/[\/\*\+]-$/,value)
+            }));
+        }
         else{
-            if(value == "-"){
-                this.setState( state => ({
-                    userInput: value,
-                    output: state.output.replace(/[\/\*\+]$/, state.output.charAt(state.output.length-1)+value)
-                }));
-            }
-            else{
-                if(/[\/\*\+]-$/.test(this.state.output)){
-                    this.setState( state => ({
-                        userInput: value,
-                        output: state.output.replace(/[\/\*\+]-$/,value)
-                    }));
-                }
-                else{
-                    this.setState( state => ({
-                        userInput: value,
-                        output: state.output.replace(/[\/\*\-\+]$/,value)
-                    }));
-                }
-            }
+            this.setState( state => ({
+                userInput: value,
+                output: state.output.replace(/[\/\*\-\+]$/,value)
+            }));
         }
     }
     handleClick(event){
