@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   color: #fff;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 #root {
@@ -28,9 +28,14 @@
 }
 
 .label {
-  font-family: "LED Digital 7", sans-serif;
+  font-family: sans-serif;
   grid-column: 1/span 4;
   text-align: right;
+}
+
+.output {
+  color: #ffa500;
+  font-size: 0.6em;
 }
 
 input {
@@ -59,4 +64,6 @@ input:hover {
 
 #zero {
   grid-column: 1/span 2;
-}/*# sourceMappingURL=styles.css.map */
+}
+
+/* event *//*# sourceMappingURL=styles.css.map */
