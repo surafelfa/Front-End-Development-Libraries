@@ -9,6 +9,7 @@ html{
 }
 .main-wrapper{
     max-width: 100vw;
+    min-width: 300px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -18,6 +19,7 @@ html{
     background-color: white;
     width: 55rem;
     max-width: 100%;
+    min-width: 200px;
     min-height: 25rem;
     padding: 4rem 5rem;
     border-radius: .5rem;
@@ -65,4 +67,14 @@ html{
 }
 .fgcolor{
     transition: color 1s ease-in;
+}
+@media only screen and (max-width: 450px){
+    span
+    {
+        font-size: 24px;
+        
+    }
+    #quote-box{
+        padding: 2rem 3rem;
+    }
 }
