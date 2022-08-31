@@ -14,7 +14,7 @@ $background-color: #c0d8d8;
 }
 
 body{
-    background-color: #87b5b5;;
+    background-color: #87b5b5;
 }
 .outter-div{
     margin: 20px auto;
@@ -24,12 +24,12 @@ body{
 .editor.outter-div{
     width: 500px;
     max-width: 70vw; 
-    min-width: 300px; 
+    min-width: 400px; 
 }
 .previewer.outter-div{
     width: 700px;
     max-width: 80vw;
-    min-width: 450px; 
+    min-width: 400px; 
 }
 .header-div{
     display: flex;
