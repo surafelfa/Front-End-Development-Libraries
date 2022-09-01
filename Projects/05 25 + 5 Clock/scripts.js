@@ -1,5 +1,4 @@
 
-
 class Clock extends React.Component{
 
     constructor(props){
@@ -8,13 +7,16 @@ class Clock extends React.Component{
             breakLenght: 5,
             sessionLength: 25,
             mm: 25,
+            ss: 0,
+            counter: undefined,
+            isPlayed: true,
         }
         this.breakDecrementClicked =  this.breakDecrementClicked.bind(this);
         this.breakIncrementClicked = this.breakIncrementClicked.bind(this);
         this.sessionDecrementClicked = this.sessionDecrementClicked.bind(this);
         this.sessionIncrementClicked = this.sessionIncrementClicked.bind(this);
-        this.startTimer_mm = this.startTimer_mm.bind(this);
-        this.startTimer_ss = this.startTimer_ss.bind(this);
+        this.startSession = this.startSession.bind(this);
+        this.startBreak = this.startBreak.bind(this);
         this.reset = this.reset.bind(this);
     }
     breakDecrementClicked(){
@@ -47,29 +49,62 @@ class Clock extends React.Component{
             }));
         }
     }
-    startTimer_ss(ss){
-        let ssCounter = setInterval(()=>{
-            --ss;
-            if(ss == 0) clearInterval(ssCounter);
-            if(second > 9) document.getElementById('ss').innerHTML = ss;
-            else document.getElementById('ss').innerHTML = `0${ss}`;
-        }, 1000);
-    }
-    startTimer_mm(mm){
-        let mmCounter = setInterval(()=>{
-            --mm;
-            if(mm == 0) clearInterval(mmCounter);
-            if(mm > 9) document.getElementById('mm').innerHTML = mm;
-            else document.getElementById('mm').innerHTML = `0${mm}`;
+    startBreak(){
+        this.setState({
+            counter: setInterval(()=>{
                 
-            }, 60000);
+                if(this.state.mm == 0 && this.state.ss == 0){//session should start
+                    this.setState( state =>({
+                        mm: state.sessionLength, 
+                    }));
+                    clearInterval(this.state.counter);
+                    document.getElementById("timer-label").innerText = 'Session';
+                    this.startSession();
+                }else if(this.state.ss == 0 && this.state.mm != 0){
+                    this.setState(state =>({
+                        mm: --state.mm,
+                        ss: 59
+                    }));
+                }else{
+                    this.setState(state =>({
+                        ss: --state.ss,
+                    }));
+                }         
+            }, 1000)
+        });
+    }
+    startSession(){
+        this.setState({
+            counter: setInterval(()=>{
+                if(this.state.mm == 0 && this.state.ss == 0){//break should start
+                    this.setState( state =>({
+                        mm: state.breakLenght, 
+                    }));
+                    clearInterval(this.state.counter);
+                    document.getElementById("timer-label").innerText = 'Break';
+                    this.startBreak();
+                }else if(this.state.ss == 0 && this.state.mm != 0){
+                    this.setState(state =>({
+                        mm: --state.mm,
+                        ss: 59
+                    }));
+                }else{
+                    this.setState(state =>({
+                        ss: --state.ss,
+                    }));
+                }         
+            }, 1000)
+        });
     }
     reset(){
         this.setState({
             breakLenght: 5,
             sessionLength: 25,
             mm: 25,
-        })
+            ss: 0,
+            
+        });
+        clearInterval(this.state.counter);
     }
     render(){
 
@@ -85,7 +120,7 @@ class Clock extends React.Component{
                         <span id="break-length"> {this.state.breakLenght} </span>
                         <i id="break-increment" className="fas fa-arrow-up" onClick={this.breakIncrementClicked}></i>
                     </span>
-                    <span className="spacer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span className="spacer">&emsp;&emsp;</span>
                     <span className="session-wrapper">
                         <div id="session-label">
                             Session Length
@@ -98,11 +133,11 @@ class Clock extends React.Component{
                 <div className="timer">
                     <p id="timer-label">Session</p>
                     <span id="time-left">
-                        <span id="mm">{this.state.mm}</span>:<span id="ss">00</span>
+                        <span id="mm">{this.state.mm}</span>:<span id="ss">{this.state.ss}</span>
                     </span>                   
                 </div>
                 <div className="clickable">
-                    <button id="start_stop"><i className="fa fa-play"></i><i className="fa fa-pause"></i></button>
+                    <button id="start_stop" onClick={this.startSession}><span id="play-pause"><i className="fa fa-play"></i><i className="fa fa-pause"></i></span></button>
                     <button id="reset" onClick={this.reset}><i className="fa fa-arrows-rotate"></i></button>
                 </div>
             </div>
