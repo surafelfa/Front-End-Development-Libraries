@@ -52,8 +52,7 @@ class Clock extends React.Component{
     startBreak(){
         this.setState({
             counter: setInterval(()=>{
-                
-                if(this.state.mm == 0 && this.state.ss == 0){//session should start
+                if(this.state.mm == 0 && this.state.ss == 0){//session should start as break ends
                     this.setState( state =>({
                         mm: state.sessionLength, 
                     }));
@@ -76,7 +75,7 @@ class Clock extends React.Component{
     startSession(){
         this.setState({
             counter: setInterval(()=>{
-                if(this.state.mm == 0 && this.state.ss == 0){//break should start
+                if(this.state.mm == 0 && this.state.ss == 0){//break should start as session ends
                     this.setState( state =>({
                         mm: state.breakLenght, 
                     }));
@@ -133,7 +132,7 @@ class Clock extends React.Component{
                 <div className="timer">
                     <p id="timer-label">Session</p>
                     <span id="time-left">
-                        <span id="mm">{this.state.mm}</span>:<span id="ss">{this.state.ss}</span>
+                        <span id="mm">{(this.state.mm > 9) ? this.state.mm : `0${this.state.mm}`}</span>:<span id="ss">{(this.state.ss>9) ? this.state.ss : `0${this.state.ss}`}</span>
                     </span>                   
                 </div>
                 <div className="clickable">
