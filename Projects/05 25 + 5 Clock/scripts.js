@@ -9,7 +9,7 @@ class Clock extends React.Component{
             timeCounter: 1500,
             intervalID: undefined,
             isSession: true,
-            isRunning: false
+            isRunning: false,
         }
         this.timeFormatter = this.timeFormatter.bind(this);
         this.breakDecrementClicked =  this.breakDecrementClicked.bind(this);
@@ -69,7 +69,7 @@ class Clock extends React.Component{
                     }));
                     clearInterval(this.state.intervalID);
                     document.getElementById("timer-label").innerText = 'Session';
-                    //document.getElementById('beep').play();
+                    document.getElementById('beep').play();
                     this.startSession();
                 }else{
                     this.setState(state =>({
@@ -89,7 +89,7 @@ class Clock extends React.Component{
                     }));
                     clearInterval(this.state.intervalID);
                     document.getElementById("timer-label").innerText = 'Break';
-                    //document.getElementById('beep').play();
+                    document.getElementById('beep').play();
                     this.startBreak();
                 }else{
                     this.setState(state =>({
@@ -126,6 +126,8 @@ class Clock extends React.Component{
             isRunning: false
         });
         clearInterval(this.state.intervalID);
+        document.querySelector('audio').pause();
+        document.querySelector('audio').currentTime = 0;
         document.getElementById("timer-label").innerText = 'Session';
     }
     render(){
@@ -142,7 +144,6 @@ class Clock extends React.Component{
                         <h3 id="break-length"> {this.state.breakLenght} </h3>
                         <i id="break-increment" className="fas fa-arrow-up" onClick={this.breakIncrementClicked}></i>
                     </span>
-                    <span className="spacer">&emsp;&emsp;&emsp;</span>
                     <span className="session-wrapper">
                         <h2 id="session-label">
                             Session Length
@@ -162,7 +163,8 @@ class Clock extends React.Component{
                     <button id="start_stop" onClick={this.startTimeCounter}><span id="play-pause"><i className="fa fa-play"></i><i className="fa fa-pause"></i></span></button>
                     <button id="reset" onClick={this.reset}><i className="fa fa-arrows-rotate"></i></button>
                 </div>
-                <audio id="beep"type="audio/mp3" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"></audio>
+                <audio id="beep"type="audio/mp3" 
+                src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
             </div>
         );
     }
