@@ -22,7 +22,7 @@
     transform: translate(-50%, -50%);
     padding: 15px;
     display: flex;
-    width: 50%;
+    width: 70%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -30,10 +30,7 @@
 }
 .break-session-wrapper{
     padding: 20px 0;
-    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
 }
 .timer{
     width: fit-content;
@@ -64,11 +61,14 @@ i{
 .timer.time-out{
     color: red;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 520px) {
     *{
         font-weight: normal;
     }
     #time-left{
         font-size: 4rem;
+    }
+    .break-session-wrapper{
+        display: block;
     }
 }
